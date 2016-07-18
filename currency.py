@@ -9,9 +9,29 @@ class Currency:
 
 
     def __add__(self, other_amt):
-        if self.currency_code == other_amt.currency_code:
+        try:
+            if self.currency_code != other_amt.currency_code:
+                raise DifferentCurrencyCodeError
             return (self.amount + other_amt.amount, self.currency_code)
+        except ZeroDivisionError:
+            pass
+
+    def __sub__(self, other_amt):
+        if self.currency_code == other_amt.currency_code:
+            return (self.amount - other_amt.amount, self.currency_code)
 
 
-    # def atsnt(num1, num1)
-    #     reutrn n1=n2
+
+
+
+
+
+
+class DifferentCurrencyCodeError(Exception):
+    pass
+
+
+    # def raise_cc_error(self, other):
+    #     if self.currency_code != other.currency_code:
+    #         raise Exception ("Your currencies aren't the same.")
+    #     else:
