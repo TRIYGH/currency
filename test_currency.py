@@ -5,7 +5,7 @@ from currency import DifferentCurrencyCodeError
 from nose.tools import assert_raises
 
 
-def c_amount_and_c_code():
+def test_c_amount_and_c_code():
     dollar = Currency(1, 'USD')
 
     assert dollar.amount == 1
@@ -65,3 +65,19 @@ def test_multiply_by_a_float():
     amount = 2.055
 
     assert currency1 * amount == (20.55, 'USD')
+
+
+def test_recognize_symbols():
+    currency1 = ('$15.67')
+    assert Currency.money_identifier(currency1) == (15.67, 'USD')
+    currency2 = ('€23.23')
+    assert Currency.money_identifier(currency2) == (23.23, 'EUR')
+    currency3 = ('¥123.45')
+    assert Currency.money_identifier(currency3) == (123.45, 'JPY')
+
+    # currency2 = Currency(20, 'EUR')
+    # currency3 = Currency(99, 'JPY')
+
+
+
+    "€ ¥ ç"

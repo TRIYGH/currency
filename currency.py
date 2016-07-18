@@ -9,24 +9,32 @@ class Currency:
 
 
     def __add__(self, other_amt):
-        try:
-            if self.currency_code != other_amt.currency_code:
-                raise DifferentCurrencyCodeError
-            return (self.amount + other_amt.amount, self.currency_code)
-        except ZeroDivisionError:
-            pass
+        if self.currency_code != other_amt.currency_code:
+            raise DifferentCurrencyCodeError
+
+        return (self.amount + other_amt.amount, self.currency_code)
+
 
     def __sub__(self, other_amt):
-        try:
-            if self.currency_code != other_amt.currency_code:
-                raise DifferentCurrencyCodeError
-            return (self.amount - other_amt.amount, self.currency_code)
-        except ZeroDivisionError:
-            pass
+        if self.currency_code != other_amt.currency_code:
+            raise DifferentCurrencyCodeError
+
+        return (self.amount - other_amt.amount, self.currency_code)
 
 
     def __mul__(self, other_amt):
         return (self.amount * other_amt, self.currency_code)
+
+
+    def money_identifier(self):
+        symbols = {'€': 'EUR', '$': 'USD', '¥': 'JPY'}
+        x = list(self)
+        for each in x:
+            if each in symbols:
+                symbol = symbols[each]
+                x.pop(0)
+                money = float("".join(x))
+                return (money, symbol)
 
 
 
