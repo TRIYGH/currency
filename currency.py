@@ -25,7 +25,8 @@ class Currency:
             pass
 
 
-
+    def __mul__(self, other_amt):
+        return (self.amount * other_amt, self.currency_code)
 
 
 

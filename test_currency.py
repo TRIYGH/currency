@@ -7,7 +7,7 @@ from nose.tools import assert_raises
 
 def c_amount_and_c_code():
     dollar = Currency(1, 'USD')
-    
+
     assert dollar.amount == 1
     assert dollar.currency_code == 'USD'
 
@@ -51,3 +51,17 @@ def test_sub_currency_error():
     currency2 = Currency(22, 'USD')
 
     assert_raises(DifferentCurrencyCodeError, Currency.__sub__, currency1, currency2)
+
+
+def test_multiply_by_a_number():
+    currency1 = Currency(10, 'USD')
+    amount = 25
+
+    assert currency1 * amount == (250, 'USD')
+
+
+def test_multiply_by_a_float():
+    currency1 = Currency(10, 'USD')
+    amount = 2.055
+
+    assert currency1 * amount == (20.55, 'USD')
