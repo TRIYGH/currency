@@ -39,7 +39,6 @@ class Currency:
 
 
 
-
 class DifferentCurrencyCodeError(Exception):
     pass
 
